@@ -2,22 +2,28 @@
 
   <div class="quizz-header">
     <img src="assets/images/logo.png" alt="BuzzFeed Logo ">
-    <h3>Titulo</h3>
+    <h3>{{title}}</h3>
   </div>
 
-  <div class="quizz-questions">
-    <h3>Selected Question</h3>
+  <div *ngIf=!end class="quizz-questions">
+    <h3>{{questionSelected.question}}</h3>
   </div>
 
-  <div class="quizz-options">
-    <button class="button-description">
-      optiondescription
+  <div *ngIf=!end class="quizz-options">
+    <button
+    *ngFor="let option of questionSelected.options; let i=index"
+    (click)="optionSelected(option.alias)"
+    class="button-description"
+    >
+      {{option.name}}
     </button>
   </div>
 
-  <div class="quizz-results">
-    <h1>Resultado foi decidido</h1>
-    <p>Resposta da vez</p>
+  <div *ngIf=end class="quizz-results">
+    <h1>O Resultado foi decidido pelo tribunal</h1>
+    <img *ngIf="answerSelected === 'Você muito provavelmente seria um super herói!'" src="assets/images/batman.gif" alt="">
+    <img *ngIf="answerSelected === 'Você muito provavelmente seria um super vilão!'" src="assets/images/joker.gif" alt="">
+    <p>{{answerSelected}}</p>
   </div>
 
 </div>
